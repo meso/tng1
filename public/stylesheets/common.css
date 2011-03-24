@@ -272,3 +272,15 @@
 				font-weight:bold;
 			}
 
+	.mod-viewer {
+		position:fixed;
+		z-index:9999;
+		bottom:0;
+		left:0;
+		right:0;
+		font-size: 1em;
+		padding:0 0 .2em;
+		text-align:right;
+	}
+
+

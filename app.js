@@ -3,7 +3,8 @@
  * Module dependencies.
  */
 
-var express = require('express');
+var express = require('express'),
+    io = require('socket.io');
 
 var app = module.exports = express.createServer();
 
@@ -40,3 +41,17 @@ if (!module.parent) {
   app.listen(3007);
   console.log("Express server listening on port %d", app.address().port);
 }
+
+var socket = io.listen(app);
+var count = 0;
+socket.on('connection', function(client) {
+  count++;
+  socket.broadcast({count: count});
+  console.log("count: " + count);
+  client.on('disconnect', function() {
+    count--;
+    socket.broadcast({count: count});
+    console.log("count: " + count);
+  });
+});
+
